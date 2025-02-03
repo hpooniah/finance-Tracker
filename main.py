@@ -1,20 +1,20 @@
 # Ask for monthly allowance and expenses in different categories
 
 # Make a list
-allowance_list = []
+expanses = []
 
 while True: 
     
     #Greet the user
     name =input("What is your name?").strip().lower()
-    print(f"Hello{name}!\nThis is a monthly allowance calculator")
+    print(f"Hello{name}!\nThis is a Finace Tracker")
 
     invalid = True
 
     while invalid:
         try:
              # Ask user for how many different expanses
-            num_allowance = int(input("How many assignemnets do you want to have averaged? ").strip())
+            num_expanses = int(input("How many expenses do you have? ").strip())
         except ValueError:
             print("Only type integers!")
         else: # When there is no error
@@ -22,29 +22,33 @@ while True:
            
             # Loop as many items needed to add each item
             # Append each item to the list
-            for i in range(num_allowance):
-                grade = int(float(input(f"Grade for the assignment {i+1}: ")))
-                allowance_list.append(grade)
-
-            # Find average for the assignment grades
-            grades_sum = sum(allowance_list)
-            average_grade = grades_sum / num_allowance
-
-            print(f"Your average grade is {round(average_grade,1)}")
+    for i in range(num_expanses):
+        try:
+            expanse = int(float(input(f"Cost of each Expanse {i+1}: ")))
+            expanses.append(expanse)
+        except ValueError:
+            print("Please enter a number for each expense")
 
 
-    # Ask user if they want to play again
-    play_again = input("Do You Wish To Calculate Agian? [y] or [n]").strip().lower()
-    if play_again != "y":
+            # Find total for expanses
+            Total_expanses= sum(expanses)
+            print(f"Your Total Expanses for this month are {round(Total_expanses,1)}")
+
+            # Find the Monthly Allowance
+            try:
+                allowance = float(input("What's your monthly allowance? "))
+            except ValueError:
+                print("Please enter a number for your Monthly Allowance.")
+                continue
+                
+            # Calculate how much left from allowance
+            money_left = allowance - Total_expanses 
+            print(f"You have {round(money_left, 2)} dolloars left from yout Monthly Allowence")
+
+    # Ask user if they want to try again
+    try_again = input("Do You Wish to find your monthly allowence agian? [y] or [n]").strip().lower()
+    if try_again != "y":
         break
 
     print("Thank you for calculating with this student grade caculator program.")
-
-
-
-
-# Calculate total expenses and remaining balance
-# Display results
-# Conditional message based on balance (depending on whether you overspent or underspent or spent just the right amount, write a specific message - try to be kind!)
-
-
+    
